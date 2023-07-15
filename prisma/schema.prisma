@@ -5,12 +5,23 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator zod {
+  provider              = "zod-prisma"
+  output                = "./zod" // (default) the directory where generated zod schemas will be saved
+  relationModel         = true // (default) Create and export both plain and related models.
+  modelCase             = "PascalCase" // (default) Output models using pascal case (ex. UserModel, PostModel)
+  modelSuffix           = "Model" // (default) Suffix to apply to your prisma models when naming Zod schemas
+  useDecimalJs          = true // represent the prisma Decimal type using Decimal.js (as Prisma does)
+  prismaJsonNullability = true // (default) uses prisma's scheme for JSON field nullability
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Ingredient {
-  id   String @id @unique @default(uuid())
-  name String
+  id        String   @id @unique @default(uuid()) ///@zod.uuid().optional()
+  name      String ///@zod.min(2,{message:"Nombre demasiado corto"})
+  createdAt DateTime @default(now()) ///@zod.optional()
 }

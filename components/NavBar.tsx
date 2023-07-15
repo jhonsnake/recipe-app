@@ -1,4 +1,4 @@
-import {  ModeToggle } from "@/components/theme-provider";
+
 import Link from "next/link";
 
 const NavBarComponent = () => {
@@ -15,7 +15,7 @@ const NavBarComponent = () => {
 
         </ul>
         </div>
-    <ModeToggle />
+
     </div>
    </div>
   </nav>
