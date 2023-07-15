@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getIngredients, createIngredient } from "@/lib/data";
+import uuid from 'react-uuid';
 
 export async function GET(request: Request) {
   try {
@@ -19,7 +20,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
     const { name } = await request.json();
     try {
-        const ingredient = await createIngredient({ name, id: Date.now().toString(), createdAt: new Date() });
+        const ingredient = await createIngredient({ name, id: uuid(), createdAt: new Date() });
     return NextResponse.json(
       { message: "Success", ingredient },
       { status: 201, statusText: "Created" }
