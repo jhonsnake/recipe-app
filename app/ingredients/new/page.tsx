@@ -1,64 +1,69 @@
-"use client"
-import { useState } from "react";
+"use client";
 import PageTitle from "@/components/PageTitle";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IngredientModel } from "../../../prisma/zod";
 import { Ingredient } from "@prisma/client";
 import { Button } from "@/components/ui/button";
-
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import Link from "next/link";
 
 export default function NewIngredientPage() {
-
-
-
-
-  const { register,
-    handleSubmit,
-  formState: { errors }
-
-  } = useForm<Ingredient>({
-    resolver: zodResolver(IngredientModel)
-  })
-  const onSubmit: SubmitHandler<Ingredient> = (data) => {
-
-
-  // create a new ingredient
-  fetch('/api/ingredients', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
+  const IngredientForm = useForm<Ingredient>({
+    resolver: zodResolver(IngredientModel),
+    defaultValues: {
+      name: "",
     },
-    body: JSON.stringify(data)
-  })
-}
+  });
 
-
-
+  const onSubmit: SubmitHandler<Ingredient> = (data) => {
+    // create a new ingredient
+    fetch("/api/ingredients", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  };
 
   return (
     <main>
-      <PageTitle title="Crear Ingrediente" />
+      <PageTitle title="Nuevo ingrediente" />
       <section className="my-4">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <Label htmlFor="name">Nombre del ingrediente</Label>
-          <Input
-            {...register("name")}
-            id="name"
-            type="text"
-            placeholder="Ingresa el nombre de tu ingrediente"
-          />
-
-          {errors.name?.message && <p>{`${errors.name?.message}`}</p>}
-        </div>
-        <div>
-          <Button type="submit">Crear</Button>
-        </div>
-      </form>
-    </section>
+        <Form {...IngredientForm}>
+          <form
+            onSubmit={IngredientForm.handleSubmit(onSubmit)}
+            className="space-y-8"
+          >
+            <FormField
+              control={IngredientForm.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nombre del ingrediente</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Ingresa el nombre del ingrediente"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit">Crear</Button>
+          </form>
+        </Form>
+      </section>
     </main>
   );
 }
