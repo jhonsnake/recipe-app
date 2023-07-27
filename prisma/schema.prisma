@@ -24,4 +24,17 @@ model Ingredient {
   id        String   @id @unique @default(uuid()) ///@zod.uuid().optional()
   name      String ///@zod.min(2,{message:"Nombre demasiado corto"})
   createdAt DateTime @default(now()) ///@zod.optional()
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+model User {
+  id          String       @id @unique @default(uuid()) ///@zod.uuid()
+  email       String       @unique
+  name        String
+  password    String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  ingredients Ingredient[]
 }
