@@ -27,7 +27,7 @@ export async function GET(request: Request, response: Response) {
 
 export async function PUT(request: Request, response: Response) {
   try {
-    const id = request.url.split("ingredients/")[1];
+    const id = request.url.split("ingredients/")[1]; //TODO: mejorar usando params
     const ingredient = await getIngredient(id);
     if (!ingredient) {
       return NextResponse.json(
@@ -52,7 +52,7 @@ export async function PUT(request: Request, response: Response) {
 
 export async function DELETE(request: Request, response: Response) {
   try {
-    const id = request.url.split("ingredients/")[1];
+    const id = request.url.split("ingredients/")[1]; //TODO: mejorar usando params
     const ingredient = await getIngredient(id);
     if (!ingredient) {
       return NextResponse.json(

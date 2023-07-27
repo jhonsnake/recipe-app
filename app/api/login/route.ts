@@ -7,7 +7,7 @@ interface RequestBody {
   password: string;
 }
 
-export default async function Post(request: Request) {
+export async function POST(request: Request) {
   // Parse the request body
   const body: RequestBody = await request.json();
 

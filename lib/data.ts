@@ -1,6 +1,8 @@
 import { Ingredient } from "@prisma/client";
 import { prisma } from "../db";
 
+export type NewIngredient = Omit<Ingredient,  "userId"| "createdAt">;
+
 let ingredients: Ingredient[] = [];
 
 // Get all ingredients
@@ -11,7 +13,7 @@ export const getIngredients = async () => {
 };
 
 // Create a new ingredient
-export const createIngredient = async (ingredient: Ingredient) => {
+export const createIngredient = async (ingredient: NewIngredient) => {
   //ingredients.push(ingredient)
   const newIngredient = await prisma.ingredient.create({ data: ingredient });
   return newIngredient;
@@ -25,7 +27,7 @@ export const getIngredient = async (id: string) => {
 };
 
 // Update a ingredient
-export const updateIngredient = async (updatedIngredient: Ingredient) => {
+export const updateIngredient = async (updatedIngredient: NewIngredient) => {
   // ingredients = ingredients.map((ingredient) => {
   //     if (ingredient.id === updatedIngredient.id) {
   //         return updatedIngredient

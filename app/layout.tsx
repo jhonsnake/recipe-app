@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   description: "The best recipe app on the internet",
 };
 
+
+//TODO: Crear un contexto global
+
 export default function RootLayout({
   children,
 }: {

@@ -20,7 +20,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
     const { name } = await request.json();
     try {
-        const ingredient = await createIngredient({ name, id: uuid(), createdAt: new Date() });
+        const ingredient = await createIngredient({ name, id: uuid() });
     return NextResponse.json(
       { message: "Success", ingredient },
       { status: 201, statusText: "Created" }
