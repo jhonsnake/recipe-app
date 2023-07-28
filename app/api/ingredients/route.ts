@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { getIngredients, createIngredient } from "@/lib/data";
+import { getAllIngredients, createIngredient } from "@/lib/data";
 import uuid from 'react-uuid';
 
 export async function GET(request: Request) {
   try {
-    const ingredients = await getIngredients();
+    const ingredients = await getAllIngredients();
     return NextResponse.json(
       { message: "Success", ingredients },
       { status: 200, statusText: "OK" }

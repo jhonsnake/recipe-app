@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import NavBarComponent from "@/components/NavBar";
+import Providers from "@/components/Providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -11,22 +12,21 @@ export const metadata: Metadata = {
   description: "The best recipe app on the internet",
 };
 
-
 //TODO: Crear un contexto global
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
-
-        <body className={`${inter.className} `}>
-          <NavBarComponent />
-          <div className="container">{children}</div>
-        </body>
-
+    <html lang="en" >
+      <body className={`${inter.className} `}>
+        <Providers>
+        <NavBarComponent />
+        <div className="container">{children}</div>
+        </Providers>
+      </body>
     </html>
   );
 }

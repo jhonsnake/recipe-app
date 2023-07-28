@@ -2,9 +2,9 @@ import { getIngredient, updateIngredient, deleteIngredient } from "@/lib/data";
 import { NextResponse } from "next/server";
 
 
-export async function GET(request: Request, response: Response) {
+export async function GET(request: Request, response: Response, { params }: { params: { id: string } }) {
   try {
-    const id = request.url.split("ingredients/")[1];
+    const { id } = params;
     const ingredient = await getIngredient(id);
     if (!ingredient) {
       return NextResponse.json(
@@ -25,9 +25,9 @@ export async function GET(request: Request, response: Response) {
   }
 }
 
-export async function PUT(request: Request, response: Response) {
+export async function PUT(request: Request, response: Response, { params }: { params: { id: string } }) {
   try {
-    const id = request.url.split("ingredients/")[1]; //TODO: mejorar usando params
+    const { id } = params;
     const ingredient = await getIngredient(id);
     if (!ingredient) {
       return NextResponse.json(
@@ -50,9 +50,9 @@ export async function PUT(request: Request, response: Response) {
   }
 }
 
-export async function DELETE(request: Request, response: Response) {
+export async function DELETE(request: Request, response:Response, {params}: { params: { id: string } }) {
   try {
-    const id = request.url.split("ingredients/")[1]; //TODO: mejorar usando params
+    const { id } = params;
     const ingredient = await getIngredient(id);
     if (!ingredient) {
       return NextResponse.json(

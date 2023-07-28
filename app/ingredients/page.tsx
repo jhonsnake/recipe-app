@@ -3,7 +3,7 @@ import { buttonVariants  } from "@/components/ui/button"
 import { Ingredient } from "@prisma/client";
 import { columns } from "./columns"
 import Link from "next/link";
-import {  getIngredients } from '@/lib/data';
+import {  getAllIngredients } from '@/lib/data';
 import { DataTable } from '@/components/ui/data-table';
 
 //TODO fecth images
@@ -11,7 +11,9 @@ import { DataTable } from '@/components/ui/data-table';
 //TODO Be sure that the data is updating after a new ingredient is created
 
 export default async function IngredientsPage() {
-  const data: Ingredient[] =  await getIngredients()
+  const data: Ingredient[] =  await getAllIngredients()
+
+
 
 
 

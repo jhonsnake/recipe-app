@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import SigninButton from './SigninButton';
 
 const NavBarComponent = () => {
   return (
@@ -12,6 +13,9 @@ const NavBarComponent = () => {
             <li> <Link href='/ingredients'>
             Ingredientes
             </Link></li>
+            <li>
+              <SigninButton/>
+            </li>
 
         </ul>
         </div>

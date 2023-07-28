@@ -3,6 +3,7 @@ import { User } from "@prisma/client";
 import { NextResponse } from "next/server";
 import * as bcrypt from "bcrypt";
 
+
 type RequestBody = Omit<User, "createdAt" | "updatedAt" | "id">;
 
 export async function POST(request: Request) {
@@ -24,3 +25,4 @@ export async function POST(request: Request) {
     { status: 201, statusText: "Created" }
   );
 }
+

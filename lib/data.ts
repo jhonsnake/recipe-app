@@ -6,9 +6,23 @@ export type NewIngredient = Omit<Ingredient,  "userId"| "createdAt">;
 let ingredients: Ingredient[] = [];
 
 // Get all ingredients
-export const getIngredients = async () => {
+export const getAllIngredients = async () => {
   // return ingredients
   const ingredients = await prisma.ingredient.findMany();
+  return ingredients;
+};
+
+//FIXME: getting ingredient list by UserID is not working
+//get ingredients by user
+export const getIngredientsByUserId = async (id:string) => {
+  // return ingredients
+  const ingredients = await prisma.ingredient.findMany(
+    {
+      where: {
+        userId: id,
+      },
+    }
+  );
   return ingredients;
 };
 
@@ -25,6 +39,8 @@ export const getIngredient = async (id: string) => {
   const ingredient = await prisma.ingredient.findUnique({ where: { id } });
   return ingredient;
 };
+
+
 
 // Update a ingredient
 export const updateIngredient = async (updatedIngredient: NewIngredient) => {
@@ -49,3 +65,9 @@ export const deleteIngredient = (id: string) => {
   const deletedIngredient = prisma.ingredient.delete({ where: { id } });
   return deletedIngredient;
 };
+
+
+export const getUser = async (email: string) => {
+  const user = await prisma.user.findUnique({ where: { email } });
+  return user;
+}
